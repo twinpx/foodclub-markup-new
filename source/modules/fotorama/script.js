@@ -1,1 +1,0 @@
-$('.fotorama').fotorama();
