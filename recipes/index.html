@@ -14,6 +14,7 @@
     <script src="/template/jquery.js"></script>
     <script src="/template/bootstrap.js"></script>
     <script src="/template/jscript.js"></script>
+    <script src="/js/history/scripts/bundled/html4+html5/jquery.history.js"></script>
   </head>
   <body>
     <div id="bx-panel" style="height: 50px; background: yellow; z-index: 995; top: 0; left: 0; width: 100%;" class="b-bitrix-panel"><b id="bx-panel-hider" onclick="this.innerHTML='Развернуть'; this.parentNode.style.height='100px'" style="cursor: pointer;">Свернуть</b><br><i onclick="this.parentNode.style.position='fixed';">Fixed</i></div>
@@ -318,27 +319,149 @@
     <div id="content" class="all_recipes">
       <nav class="b-content-nav"><a href="/recipes/"><b>Все рецепты</b></a><a href="/rating/">Рейтинги рецептов</a><a href="/personal/recipes/">Мои рецепты</a><a href="/personal/favourite/">Избранное</a><a href="/recipes/add/" class="i-emphasise">Добавить рецепт</a>
       </nav>
-      <div class="i-center">
-        <h1>Рецепты</h1>
+      <div class="container">
+        <div class="i-center">
+          <h1>Рецепты</h1>
+        </div>
+        <div id="filter_recipes" data-all-url="/json/all_recipes_result.json" data-last-url="/json/last_recipes_result.json">
+          <div class="item cuisine">
+            <h5>Кухня</h5><a href="#" class="frame_bg"><span class="left"><span class="right"><span class="bg"><span>Выберите</span></span></span></span></a>
+          </div>
+          <div class="item dish">
+            <h5>Тип блюда</h5><a href="#" class="frame_bg"><span class="left"><span class="right"><span class="bg"><span>Выберите</span></span></span></span></a>
+          </div>
+          <div class="item ingredient">
+            <h5>Основной ингредиент</h5><a href="#" class="frame_bg"><span class="left"><span class="right"><span class="bg"><span>Выберите</span></span></span></span></a>
+          </div>
+          <div class="item tag">
+            <h5>Метка</h5><a href="#" class="frame_bg active"><span class="left"><span class="right"><span class="bg"><span>Выберите</span></span></span></span></a>
+          </div>
+          <div class="clear"></div>
+          <div id="filter_lists">
+            <div id="filter_list"></div>
+          </div>
+        </div>
+        <div class="row">
+          <section class="col-md-8">
+            <div id="fc_statistics">
+              <div class="wrapper"><span class="item"><span class="num">36</span> <span class="word">рецептов</span></span></div>
+            </div>
+            <script>
+              <!--В массиве перечислены id последних рецептов. Первые 27 из них должны быть уже выведены на странице при загрузке, остальные n перечислены здесь для дальнейшей подгрузки через ajax-->var allRecipesResult = [5271,5256,5238,5226,5207,5317,5146,5128,5111,5087,5075,5063,5042,5034,5023,5000,4989,4976,4956,4940,4926,4918,4910,4898,4883,4860,4853];
+            </script>
+            <div id="recipe_feed_block" class="row">
+              <div class="col-sm-6 b-recipe-thumb">
+                <div class="b-recipe-thumb__photo"><a href="/recipe/" title="Фета, запеченная с помидорами и паприкой" style="background-image: url( 'http://www.foodclub.ru/upload/iblock/391/0_4274c_e7cf5d53_orig.jpg' )"></a></div>
+                <h4> <a href="/recipe/">Фета, запеченная с помидорами и паприкой</a></h4>
+                <p class="b-recipe-thumb__author">От: irina_ctc</p>
+                <p class="b-recipe-thumb__info"><span title="Оставить отзыв" class="comments_icon">
+                    <noindex><a href="/recipe/#comments">12</a></noindex></span></p>
+              </div>
+              <hr class="i-size-L visible-xs-block">
+              <div class="col-sm-6 b-recipe-thumb">
+                <div class="b-recipe-thumb__photo"><a href="/recipe/" title="Фета, запеченная с помидорами и паприкой" style="background-image: url( 'http://www.foodclub.ru/upload/iblock/391/0_4274c_e7cf5d53_orig.jpg' )"></a></div>
+                <h4> <a href="/recipe/">Фета, запеченная с помидорами и паприкой</a></h4>
+                <p class="b-recipe-thumb__author">От: irina_ctc</p>
+                <p class="b-recipe-thumb__info"><span title="Оставить отзыв" class="comments_icon">
+                    <noindex><a href="/recipe/#comments">12</a></noindex></span></p>
+              </div>
+              <hr class="i-size-L i-clearfix">
+              <div class="col-sm-6 b-recipe-thumb">
+                <div class="b-recipe-thumb__photo"><a href="/recipe/" title="Фета, запеченная с помидорами и паприкой" style="background-image: url( 'http://www.foodclub.ru/upload/iblock/391/0_4274c_e7cf5d53_orig.jpg' )"></a></div>
+                <h4> <a href="/recipe/">Фета, запеченная с помидорами и паприкой</a></h4>
+                <p class="b-recipe-thumb__author">От: irina_ctc</p>
+                <p class="b-recipe-thumb__info"><span title="Оставить отзыв" class="comments_icon">
+                    <noindex><a href="/recipe/#comments">12</a></noindex></span></p>
+              </div>
+              <hr class="i-size-L visible-xs-block">
+              <div class="col-sm-6 b-recipe-thumb">
+                <div class="b-recipe-thumb__photo"><a href="/recipe/" title="Фета, запеченная с помидорами и паприкой" style="background-image: url( 'http://www.foodclub.ru/upload/iblock/391/0_4274c_e7cf5d53_orig.jpg' )"></a></div>
+                <h4> <a href="/recipe/">Фета, запеченная с помидорами и паприкой</a></h4>
+                <p class="b-recipe-thumb__author">От: irina_ctc</p>
+                <p class="b-recipe-thumb__info"><span title="Оставить отзыв" class="comments_icon">
+                    <noindex><a href="/recipe/#comments">12</a></noindex></span></p>
+              </div>
+              <hr class="i-size-L i-clearfix">
+              <div class="col-sm-6 b-recipe-thumb">
+                <div class="b-recipe-thumb__photo"><a href="/recipe/" title="Фета, запеченная с помидорами и паприкой" style="background-image: url( 'http://www.foodclub.ru/upload/iblock/391/0_4274c_e7cf5d53_orig.jpg' )"></a></div>
+                <h4> <a href="/recipe/">Фета, запеченная с помидорами и паприкой</a></h4>
+                <p class="b-recipe-thumb__author">От: irina_ctc</p>
+                <p class="b-recipe-thumb__info"><span title="Оставить отзыв" class="comments_icon">
+                    <noindex><a href="/recipe/#comments">12</a></noindex></span></p>
+              </div>
+              <hr class="i-size-L visible-xs-block">
+              <div class="col-sm-6 b-recipe-thumb">
+                <div class="b-recipe-thumb__photo"><a href="/recipe/" title="Фета, запеченная с помидорами и паприкой" style="background-image: url( 'http://www.foodclub.ru/upload/iblock/391/0_4274c_e7cf5d53_orig.jpg' )"></a></div>
+                <h4> <a href="/recipe/">Фета, запеченная с помидорами и паприкой</a></h4>
+                <p class="b-recipe-thumb__author">От: irina_ctc</p>
+                <p class="b-recipe-thumb__info"><span title="Оставить отзыв" class="comments_icon">
+                    <noindex><a href="/recipe/#comments">12</a></noindex></span></p>
+              </div>
+              <hr class="i-size-L i-clearfix">
+              <div class="col-sm-6 b-recipe-thumb">
+                <div class="b-recipe-thumb__photo"><a href="/recipe/" title="Фета, запеченная с помидорами и паприкой" style="background-image: url( 'http://www.foodclub.ru/upload/iblock/391/0_4274c_e7cf5d53_orig.jpg' )"></a></div>
+                <h4> <a href="/recipe/">Фета, запеченная с помидорами и паприкой</a></h4>
+                <p class="b-recipe-thumb__author">От: irina_ctc</p>
+                <p class="b-recipe-thumb__info"><span title="Оставить отзыв" class="comments_icon">
+                    <noindex><a href="/recipe/#comments">12</a></noindex></span></p>
+              </div>
+              <hr class="i-size-L visible-xs-block">
+              <div class="col-sm-6 b-recipe-thumb">
+                <div class="b-recipe-thumb__photo"><a href="/recipe/" title="Фета, запеченная с помидорами и паприкой" style="background-image: url( 'http://www.foodclub.ru/upload/iblock/391/0_4274c_e7cf5d53_orig.jpg' )"></a></div>
+                <h4> <a href="/recipe/">Фета, запеченная с помидорами и паприкой</a></h4>
+                <p class="b-recipe-thumb__author">От: irina_ctc</p>
+                <p class="b-recipe-thumb__info"><span title="Оставить отзыв" class="comments_icon">
+                    <noindex><a href="/recipe/#comments">12</a></noindex></span></p>
+              </div>
+              <hr class="i-size-L i-clearfix">
+              <div class="col-sm-6 b-recipe-thumb">
+                <div class="b-recipe-thumb__photo"><a href="/recipe/" title="Фета, запеченная с помидорами и паприкой" style="background-image: url( 'http://www.foodclub.ru/upload/iblock/391/0_4274c_e7cf5d53_orig.jpg' )"></a></div>
+                <h4> <a href="/recipe/">Фета, запеченная с помидорами и паприкой</a></h4>
+                <p class="b-recipe-thumb__author">От: irina_ctc</p>
+                <p class="b-recipe-thumb__info"><span title="Оставить отзыв" class="comments_icon">
+                    <noindex><a href="/recipe/#comments">12</a></noindex></span></p>
+              </div>
+              <hr class="i-size-L visible-xs-block">
+              <div class="col-sm-6 b-recipe-thumb">
+                <div class="b-recipe-thumb__photo"><a href="/recipe/" title="Фета, запеченная с помидорами и паприкой" style="background-image: url( 'http://www.foodclub.ru/upload/iblock/391/0_4274c_e7cf5d53_orig.jpg' )"></a></div>
+                <h4> <a href="/recipe/">Фета, запеченная с помидорами и паприкой</a></h4>
+                <p class="b-recipe-thumb__author">От: irina_ctc</p>
+                <p class="b-recipe-thumb__info"><span title="Оставить отзыв" class="comments_icon">
+                    <noindex><a href="/recipe/#comments">12</a></noindex></span></p>
+              </div>
+              <hr class="i-size-L i-clearfix">
+            </div>
+            <div id="get_more_recipes" data-more-url="/json/get_more_recipes.json"><a href="#" class="btn btn-default">Ещё</a><img src="/images/preloader.gif" width="160" height="20" alt=""></div>
+          </section>
+          <aside class="col-md-4 hidden-sm hidden-xs">
+            <div class="b-aside-banner"><a href="" target="_blank"><img src="/upload/banner/app.jpg" width="300" height="500" alt="Cosmopolitan"></a>
+              <div class="b-aside-banner__note">Реклама на Foodclub.ru</div>
+            </div>
+            <hr class="i-size-L">
+            <!-- start /components/aside.rom/-->
+            <link rel="stylesheet" href="/components/aside.rom/style.css">
+            <script src="/components/aside.rom/script.js"></script>
+            <div class="b-aside-rom">
+              <div class="b-h2">Рецепт месяца</div>
+              <div class="b-h4">Февраль</div><a href="" class="b-aside-rom__photo"><img src="/upload/recipe-preview/aside-rom.jpg" alt="Рецепт месяца - блинчики с вареньем"></a>
+              <hr class="i-size-M">
+              <div class="b-author"><a href="/profile/" class="b-author__pic"><img src="/upload/user/ca-ira.jpg" alt="Мария Савельева"></a><a href="/profile/" class="b-author__name">Мария Савельева</a></div>
+              <hr class="i-size-L i-decorated">
+              <div class="b-h3">Приз победителю</div><img src="/upload/kitchen/1.jpg" alt="Мультиварка POLARIS">
+              <hr>
+              <div class="b-h4">Мультиварка POLARIS</div>
+              <div class="b-aside-rom__note">Чтобы получить главный приз: добавьте рецепт, сообщите своим друзьям и следите за результатами.</div>
+              <hr class="i-size-M"><a href="/recipe-of-month/" class="btn btn-default">Участвовать</a>
+            </div>
+            <!-- end /components/aside.rom/-->
+            <hr class="i-size-L">
+            <div class="b-aside-banner i-float"><a href="" target="_blank"><img src="/upload/banner/app.jpg" width="300" height="500" alt="Cosmopolitan"></a>
+              <div class="b-aside-banner__note">Реклама на Foodclub.ru</div>
+            </div>
+          </aside>
+        </div>
       </div>
-      <div id="filter_recipes">
-        <div class="item cuisine">
-          <h5>Кухня</h5><a href="#" class="frame_bg"><span class="left"><span class="right"><span class="bg"><span>Выберите</span></span></span></span></a>
-        </div>
-        <div class="item dish">
-          <h5>Тип блюда</h5><a href="#" class="frame_bg"><span class="left"><span class="right"><span class="bg"><span>Выберите</span></span></span></span></a>
-        </div>
-        <div class="item ingredient">
-          <h5>Основной ингредиент</h5><a href="#" class="frame_bg"><span class="left"><span class="right"><span class="bg"><span>Выберите</span></span></span></span></a>
-        </div>
-        <div class="item tag">
-          <h5>Метка</h5><a href="#" class="frame_bg active"><span class="left"><span class="right"><span class="bg"><span>Выберите</span></span></span></span></a>
-        </div>
-        <div class="clear"></div>
-        <div id="filter_lists">
-          <div id="filter_list"></div>
-        </div>
-      </div>
+      <hr class="i-size-L">
     </div>
     <footer id="bottom" class="b-footer">
       <div class="visible-xs-block text-center"><img src="/templates/images/twinpx-logo.gif" width="83" height="31" alt="Twin px">
